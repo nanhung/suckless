@@ -59,7 +59,7 @@ set timeoutlen=500
 inoremap jj <Esc>
 
 " NerdTree settings
-map <Leader>nn :NERDTreeToggle<CR>
+map <Leader>nt :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$']  " ignore pyc files
 
 " General settings
