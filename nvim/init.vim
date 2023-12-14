@@ -66,6 +66,7 @@ let NERDTreeIgnore = ['\.pyc$']  " ignore pyc files
 set backspace=indent,eol,start  " To make backscape work in all conditions
 set ma                          " To set mark a at current cursor location
 set number                      " To switch the line numbers on
+set relativenumber
 set expandtab                   " To enter spaces when tab is pressed
 set smarttab                    " To use smart tabs
 set autoindent                  " To copy indentation from current line 
