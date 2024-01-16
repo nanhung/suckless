@@ -90,6 +90,10 @@ set smartcase                   " When searching try to be smart about cases.
 set hlsearch                    " To highlight search results.
 set incsearch                   " To make search act like search in modern browsers.
 
+" set python path (use :checkhealth to check status)
+" the pynvim also need to be installed through conda install pynvim
+let g:python3_host_prog = '/home/nan/miniforge3/bin/python3'
+
 " set vim-r-plugin to 
 let r_indent_align_args = 0
 " Set vim-r-plugin to mimics ess :
