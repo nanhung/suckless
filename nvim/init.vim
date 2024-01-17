@@ -49,6 +49,8 @@ set ignorecase                  " To ignore case when searching.
 set smartcase                   " When searching try to be smart about cases.
 set hlsearch                    " To highlight search results.
 set incsearch                   " To make search act like search in modern browsers.
+"set linebreak breakindent       " not cut word when switch line
+"set textwidth=120               " set text width 
 
 " Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? "\<CR>" : "\<Tab>"
@@ -130,8 +132,9 @@ let R_assign = 0
 "let R_args = []  " if you had set any
 "let R_bracketed_paste = 1
 "
-""3G    "go to line 3
-"3gt    "go to tab 3
-":b3    "go to buffer
+"3G   "go to line 3
+"3gt  "go to tab 3
+":b3  "go to buffer
+"gj   " display line move  
 "<C-6> buffer switch
 
