@@ -6,12 +6,11 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 
 " Shorthand notation
-Plug 'rakr/vim-one'            	     " vim-one color theme
-Plug 'jalvesaq/Nvim-R'               " required for ncm-R
-Plug 'itchyny/lightline.vim'     	   " minimal status bar
-Plug 'mhinz/vim-startify'            " A start menu for vim
+Plug 'rakr/vim-one'            	" vim-one color theme
+Plug 'jalvesaq/Nvim-R'               
+Plug 'itchyny/lightline.vim'    " minimal status bar
+Plug 'mhinz/vim-startify'       " a start menu for vim
 Plug 'ervandew/supertab'        " completions with Tab
-Plug 'mhinz/vim-startify'       " A start menu for vim
 Plug 'Raimondi/delimitMate'     " automatic closing of quotes, brackets, etc
 Plug 'jalvesaq/R-Vim-runtime'   " indent for pipe
 Plug 'airblade/vim-gitgutter'   " show git changes in gutter
@@ -91,11 +90,6 @@ nnoremap <Left>  :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up>    :echoe "Use k"<CR>
 nnoremap <Down>  :echoe "Use j"<CR>
-" ...and in insert mode
-"inoremap <Left>  <ESC>:echoe "Use h"<CR>
-"inoremap <Right> <ESC>:echoe "Use l"<CR>
-"inoremap <Up>    <ESC>:echoe "Use k"<CR>
-"inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
 " shown in any window) that has unsaved changes. This is to prevent you from "
@@ -103,3 +97,41 @@ nnoremap <Down>  :echoe "Use j"<CR>
 " hidden buffers helpful enough to disable this protection. See `:help hidden`
 " for more information on this.
 set hidden
+
+" Return to last edit position when opening files
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Move line up/down: ddkp/ddp
+" Select and replace all: :%s/SearchWord/ReplaceWord
+
+" Nvim-R
+" https://github.com/jamespeapen/Nvim-R/wiki/Use
+" <C-x-o>   " Auto complete
+" \rf       " Connect to R console.
+" \rq       " Quit R console.
+" \ro       " Open object bowser.
+" \d        " Execute current line of code and move to the next line.
+" \ss       " Execute a block of selected code.
+" \aa       " Execute the entire script. This is equivalent to source().
+"
+"  . Chunk (cur)                                        \cc
+"  . Chunk (cur, echo)                                  \ce
+"  . Chunk (cur, down)                                  \cd
+"  . Chunk (cur, echo and down)                         \ca
+"  . Chunk (from first to here)                         \ch
+
+" Disable converting underscore into <-
+let R_assign = 0
+
+" Use radian (had issue in resizing plot)
+"let R_app = "radian"
+"let R_cmd = "R"
+"let R_hl_term = 0
+"let R_args = []  " if you had set any
+"let R_bracketed_paste = 1
+"
+""3G    "go to line 3
+"3gt    "go to tab 3
+":b3    "go to buffer
+"<C-6> buffer switch
+
