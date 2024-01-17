@@ -8,7 +8,6 @@ call plug#begin('~/.vim/plugged')
 " Shorthand notation
 Plug 'rakr/vim-one'            	     " vim-one color theme
 Plug 'jalvesaq/Nvim-R'               " required for ncm-R
-Plug 'preservim/nerdtree'        	   " side bar file tree 
 Plug 'itchyny/lightline.vim'     	   " minimal status bar
 Plug 'mhinz/vim-startify'            " A start menu for vim
 Plug 'ervandew/supertab'        " completions with Tab
@@ -73,10 +72,6 @@ map <Leader>tt :new term://bash<CR>i<CR><C-\><C-n><C-w><C-j>k
 " Alternative method to escape
 set timeoutlen=500
 inoremap jj <Esc>
-
-" NerdTree settings
-map <Leader>nt :NERDTreeToggle<CR>
-let NERDTreeIgnore = ['\.pyc$']  " ignore pyc files
 
 " set vim-r-plugin to 
 let r_indent_align_args = 0
