@@ -9,13 +9,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'rakr/vim-one'            	     " vim-one color theme
 Plug 'jalvesaq/Nvim-R'               " required for ncm-R
 Plug 'preservim/nerdtree'        	   " side bar file tree 
-Plug 'ThePrimeagen/vim-be-good'
 Plug 'itchyny/lightline.vim'     	   " minimal status bar
 Plug 'mhinz/vim-startify'            " A start menu for vim
 Plug 'ervandew/supertab'        " completions with Tab
-Plug 'mhinz/vim-startify'             	   " A start menu for vim
+Plug 'mhinz/vim-startify'       " A start menu for vim
 Plug 'Raimondi/delimitMate'     " automatic closing of quotes, brackets, etc
-Plug 'jalvesaq/R-Vim-runtime'        " indent for pipe
+Plug 'jalvesaq/R-Vim-runtime'   " indent for pipe
+Plug 'airblade/vim-gitgutter'   " show git changes in gutter
+Plug 'ThePrimeagen/vim-be-good'
 " Initialize plugin system
 call plug#end()
 
