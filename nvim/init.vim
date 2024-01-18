@@ -15,12 +15,15 @@ Plug 'jalvesaq/R-Vim-runtime'   " indent for pipe
 Plug 'airblade/vim-gitgutter'   " show git changes in gutter
 Plug 'karoliskoncevicius/vim-sendtowindow'
 Plug 'ThePrimeagen/vim-be-good'
+Plug 'vim-pandoc/vim-pandoc'    " bibliogrophy auto complete in markdown
+Plug 'vim-pandoc/vim-pandoc-syntax'
 " Initialize plugin system
 call plug#end()
 
 " Theme settings
 colorscheme one
 set background=dark " for the dark version
+"set background=light " for the light version
 set termguicolors
 
 " General settings
@@ -94,11 +97,6 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up>    :echoe "Use k"<CR>
 nnoremap <Down>  :echoe "Use j"<CR>
 
-" Automatic closing brackets
-inoremap { {}<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
 " shown in any window) that has unsaved changes. This is to prevent you from "
 " forgetting about unsaved changes and then quitting e.g. via `:qa!`. We find
@@ -144,3 +142,4 @@ let R_assign = 0
 "gj   "Down one display line
 "<C-6> buffer switch
 
+"z= spell suggest
