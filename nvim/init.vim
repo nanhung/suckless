@@ -13,6 +13,7 @@ Plug 'mhinz/vim-startify'       " a start menu for vim
 Plug 'ervandew/supertab'        " completions with Tab
 Plug 'jalvesaq/R-Vim-runtime'   " indent for pipe
 Plug 'airblade/vim-gitgutter'   " show git changes in gutter
+Plug 'karoliskoncevicius/vim-sendtowindow'
 Plug 'ThePrimeagen/vim-be-good'
 " Initialize plugin system
 call plug#end()
@@ -140,6 +141,6 @@ let R_assign = 0
 "3G   "go to line 3
 "3gt  "go to tab 3
 ":b3  "go to buffer
-"gj   " display line move  
+"gj   "Down one display line
 "<C-6> buffer switch
 
