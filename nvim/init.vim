@@ -11,7 +11,6 @@ Plug 'jalvesaq/Nvim-R'
 Plug 'itchyny/lightline.vim'    " minimal status bar
 Plug 'mhinz/vim-startify'       " a start menu for vim
 Plug 'ervandew/supertab'        " completions with Tab
-Plug 'Raimondi/delimitMate'     " automatic closing of quotes, brackets, etc
 Plug 'jalvesaq/R-Vim-runtime'   " indent for pipe
 Plug 'airblade/vim-gitgutter'   " show git changes in gutter
 Plug 'ThePrimeagen/vim-be-good'
@@ -50,7 +49,8 @@ set smartcase                   " When searching try to be smart about cases.
 set hlsearch                    " To highlight search results.
 set incsearch                   " To make search act like search in modern browsers.
 "set linebreak breakindent       " not cut word when switch line
-"set textwidth=120               " set text width 
+"set textwidth=120               " set text width (use in markdown) set
+"formatoptions+=a                " apply text width setting
 
 " Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? "\<CR>" : "\<Tab>"
@@ -92,6 +92,11 @@ nnoremap <Left>  :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up>    :echoe "Use k"<CR>
 nnoremap <Down>  :echoe "Use j"<CR>
+
+" Automatic closing brackets
+inoremap { {}<left>
+inoremap ( ()<left>
+inoremap [ []<left>
 
 " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
 " shown in any window) that has unsaved changes. This is to prevent you from "
