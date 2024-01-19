@@ -26,13 +26,6 @@ colorscheme one
 set background=dark " for the dark version
 set termguicolors " fg and bg highlighting requires compatible terminal colors
 
-" startify
-let g:startify_lists = [
-      \ { 'type': 'sessions',  'header': ['   Sessions']       },
-      \ { 'type': 'files',     'header': ['   Recent']            },
-      \ { 'type': 'commands',  'header': ['   Commands']       },
-      \ ]
-
 " General settings
 " The backspace key has slightly unintuitive behavior by default. For example,
 " by default, you can't backspace before the insertion point set with 'i'.
