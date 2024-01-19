@@ -6,26 +6,32 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 
 " Shorthand notation
-"Plug 'rakr/vim-one'            	" vim-one color theme
-Plug 'morhetz/gruvbox'
+Plug 'rakr/vim-one'            	" vim-one color theme
 Plug 'jalvesaq/Nvim-R'               
 Plug 'itchyny/lightline.vim'    " minimal status bar
 Plug 'mhinz/vim-startify'       " a start menu for vim
 Plug 'ervandew/supertab'        " completions with Tab
 Plug 'jalvesaq/R-Vim-runtime'   " indent for pipe
 Plug 'airblade/vim-gitgutter'   " show git changes in gutter
-Plug 'karoliskoncevicius/vim-sendtowindow'
-Plug 'ThePrimeagen/vim-be-good'
 Plug 'vim-pandoc/vim-pandoc'    " bibliogrophy auto complete in markdown
+Plug 'ThePrimeagen/vim-be-good'
+Plug 'easymotion/vim-easymotion' " go to any word quickly '\\w', '\\e', '\\b'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'karoliskoncevicius/vim-sendtowindow'
 " Initialize plugin system
 call plug#end()
 
 " Theme settings
-colorscheme gruvbox
+colorscheme one
 set background=dark " for the dark version
-"set background=light " for the light version
-set termguicolors
+set termguicolors " fg and bg highlighting requires compatible terminal colors
+
+" startify
+let g:startify_lists = [
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'files',     'header': ['   Recent']            },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
 
 " General settings
 " The backspace key has slightly unintuitive behavior by default. For example,
