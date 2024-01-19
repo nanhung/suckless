@@ -6,7 +6,8 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 
 " Shorthand notation
-Plug 'rakr/vim-one'            	" vim-one color theme
+"Plug 'rakr/vim-one'            	" vim-one color theme
+Plug 'morhetz/gruvbox'
 Plug 'jalvesaq/Nvim-R'               
 Plug 'itchyny/lightline.vim'    " minimal status bar
 Plug 'mhinz/vim-startify'       " a start menu for vim
@@ -21,7 +22,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 call plug#end()
 
 " Theme settings
-colorscheme one
+colorscheme gruvbox
 set background=dark " for the dark version
 "set background=light " for the light version
 set termguicolors
