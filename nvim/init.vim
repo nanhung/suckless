@@ -46,6 +46,9 @@ set updatetime=100  	          " set update time for gitgutter update
 set noswapfile                  " no swap
 set clipboard=unnamedplus       " copy/paste between vim and other programs
 set colorcolumn=80              " vertical line to indicate line number
+" Set colorcolumn's color to slightly lighter than my background
+" so that it is visible but not an eyesore.
+highlight ColorColumn ctermbg=235 guibg=#262626
 set foldmethod=syntax
 set mouse=a                     " enable mouse support in all mode
 set ignorecase                  " To ignore case when searching.
@@ -108,7 +111,7 @@ set hidden
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " Move line up/down: ddkp/ddp
-" Select and replace all: :%s/SearchWord/ReplaceWord
+" Replace :%s/SearchWord/ReplaceWord/c " c flag stand for confirm
 
 " Nvim-R
 " https://github.com/jamespeapen/Nvim-R/wiki/Use
