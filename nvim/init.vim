@@ -7,6 +7,7 @@ call plug#begin('~/.vim/plugged')
 
 " Shorthand notation
 Plug 'rakr/vim-one'            	" vim-one color theme
+Plug 'srcery-colors/srcery-vim'
 Plug 'jalvesaq/Nvim-R'               
 Plug 'itchyny/lightline.vim'    " minimal status bar
 Plug 'mhinz/vim-startify'       " a start menu for vim
@@ -22,7 +23,7 @@ Plug 'karoliskoncevicius/vim-sendtowindow'
 call plug#end()
 
 " Theme settings
-colorscheme one
+colorscheme srcery
 set background=dark " for the dark version
 set termguicolors " fg and bg highlighting requires compatible terminal colors
 
@@ -39,7 +40,7 @@ set expandtab                   " To enter spaces when tab is pressed
 set smarttab                    " To use smart tabs
 set autoindent                  " To copy indentation from current line 
                                 " when starting a new line.
-set si                          " To switch on smart indentation
+set smartindent                          " To switch on smart indentation
 set tabstop=2                   " The width of a hard tabstop
 set shiftwidth=2 	              " The size of an indent
 set updatetime=100  	          " set update time for gitgutter update
