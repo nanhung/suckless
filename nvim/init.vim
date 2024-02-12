@@ -1,24 +1,18 @@
 
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-
-" List of plugins.
-" Make sure you use single quotes
-
-" Shorthand notation
-Plug 'rakr/vim-one'            	" vim-one color theme
 Plug 'srcery-colors/srcery-vim'
 Plug 'jalvesaq/Nvim-R'               
-Plug 'itchyny/lightline.vim'    " minimal status bar
-Plug 'mhinz/vim-startify'       " a start menu for vim
-Plug 'ervandew/supertab'        " completions with Tab
-Plug 'jalvesaq/R-Vim-runtime'   " indent for pipe
-Plug 'airblade/vim-gitgutter'   " show git changes in gutter
-Plug 'vim-pandoc/vim-pandoc'    " bibliogrophy auto complete in markdown
-Plug 'ThePrimeagen/vim-be-good'
+Plug 'jalvesaq/R-Vim-runtime'    " indent for pipe
+Plug 'itchyny/lightline.vim'     " minimal status bar
+Plug 'mhinz/vim-startify'        " a start menu for vim
+Plug 'ervandew/supertab'         " completions with Tab
+Plug 'airblade/vim-gitgutter'    " show git changes in gutter
 Plug 'easymotion/vim-easymotion' " go to any word quickly '\\w', '\\e', '\\b'
+Plug 'vim-pandoc/vim-pandoc'     " bibliogrophy auto complete in markdown
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'karoliskoncevicius/vim-sendtowindow'
+Plug 'ThePrimeagen/vim-be-good'
 " Initialize plugin system
 call plug#end()
 
@@ -60,6 +54,8 @@ set incsearch                   " To make search act like search in modern brows
 "set textwidth=120               " set text width (use in markdown) set
 "formatoptions+=a                " apply text width setting
 
+" Return to last edit position when opening files
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 " Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? "\<CR>" : "\<Tab>"
 
@@ -89,61 +85,7 @@ let r_indent_ess_comments = 0
 let r_indent_ess_compatible = 0
 " Set syntax folding in R
 let r_syntax_folding = 1 "zR: Open all, zM: Close all , zc: close current
-
-" Try to prevent bad habits like using the arrow keys for movement. This is
-" not the only possible bad habit. For example, holding down the h/j/k/l keys
-" for movement, rather than using more efficient movement commands, is also a
-" bad habit. The former is enforceable through a .vimrc, while we don't know
-" how to prevent the latter.
-" Do this in normal mode...
-nnoremap <Left>  :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up>    :echoe "Use k"<CR>
-nnoremap <Down>  :echoe "Use j"<CR>
-
-" By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
-" shown in any window) that has unsaved changes. This is to prevent you from "
-" forgetting about unsaved changes and then quitting e.g. via `:qa!`. We find
-" hidden buffers helpful enough to disable this protection. See `:help hidden`
-" for more information on this.
-set hidden
-
-" Return to last edit position when opening files
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-" Move line up/down: ddkp/ddp
-" Replace :%s/SearchWord/ReplaceWord/c " c flag stand for confirm
-
-" Nvim-R
-" https://github.com/jamespeapen/Nvim-R/wiki/Use
-" <C-x-o>   " Auto complete
-" \rf       " Connect to R console.
-" \rq       " Quit R console.
-" \ro       " Open object bowser.
-" \d        " Execute current line of code and move to the next line.
-" \ss       " Execute a block of selected code.
-" \aa       " Execute the entire script. This is equivalent to source().
-"
-"  . Chunk (cur)                                        \cc
-"  . Chunk (cur, echo)                                  \ce
-"  . Chunk (cur, down)                                  \cd
-"  . Chunk (cur, echo and down)                         \ca
-"  . Chunk (from first to here)                         \ch
-
 " Disable converting underscore into <-
 let R_assign = 0
+let R_set_omnifunc = ["r",  "rmd", "quarto", "rnoweb", "rhelp", "rrst"]
 
-" Use radian (had issue in resizing plot)
-"let R_app = "radian"
-"let R_cmd = "R"
-"let R_hl_term = 0
-"let R_args = []  " if you had set any
-"let R_bracketed_paste = 1
-"
-"3G   "go to line 3
-"3gt  "go to tab 3
-":b3  "go to buffer
-"gj   "Down one display line
-"<C-6> buffer switch
-
-"z= spell suggest
