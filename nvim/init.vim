@@ -71,9 +71,6 @@ map <Leader>tr :new term://bash<CR>iradian<CR><C-\><C-n><C-w><C-j>k
 map <Leader>tp :new term://bash<CR>ipython3<CR><C-\><C-n><C-w><C-j>k
 map <Leader>tt :new term://bash<CR>i<CR><C-\><C-n><C-w><C-j>k
 
-" Disable Ex mode
-map Q <Nop>
-
 " Alternative method to escape
 set timeoutlen=500
 
