@@ -8,9 +8,11 @@ Plug 'itchyny/lightline.vim'     " minimal status bar
 Plug 'mhinz/vim-startify'        " a start menu for vim
 Plug 'ervandew/supertab'         " completions with Tab
 Plug 'airblade/vim-gitgutter'    " show git changes in gutter
+Plug 'tpope/vim-fugitive'        " allows git commands in vim session
 Plug 'easymotion/vim-easymotion' " go to any word quickly '\\w', '\\e', '\\b'
 Plug 'vim-pandoc/vim-pandoc'     " bibliogrophy auto complete in markdown
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'preservim/vim-markdown'    " header jumps :TOC
 Plug 'karoliskoncevicius/vim-sendtowindow'
 Plug 'ThePrimeagen/vim-be-good'
 " Initialize plugin system
@@ -45,7 +47,8 @@ set colorcolumn=80              " vertical line to indicate line number
 " so that it is visible but not an eyesore.
 highlight ColorColumn ctermbg=235 guibg=#262626
 set foldmethod=syntax
-set mouse=a                     " enable mouse support in all mode
+"set mouse=a                     " enable mouse support in all mode
+set mouse=
 set ignorecase                  " To ignore case when searching.
 set smartcase                   " When searching try to be smart about cases.
 set hlsearch                    " To highlight search results.
