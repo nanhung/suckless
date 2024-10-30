@@ -66,12 +66,10 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Escape exec $HOME/.config/sway/exit.sh
 
 # Screen locking (automatic, with a timeout)
-set $lock swaylock -c 550000
 exec swayidle -w \
-    timeout 600 $lock \
-    timeout 570 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    before-sleep $lock
+    timeout 300 'light -S 10' \
+    timeout 360 'swaylock -c 000000' \
+    before-sleep 'swaylock -c 000000'
 
 # Screen locking (manual)
 set $lock_screen exec bash ~/.config/sway/lock_screen.sh
@@ -136,16 +134,16 @@ bindsym $mod+r mode "resize"
 # Keyboard Shortcuts (Workspaces) #
 #=================================#
 # Switch to workspace
-set $ws1 "1 Terminal"
+set $ws1 "1 Vim"
 set $ws2 "2 Zotero"
-set $ws3 "3"
+set $ws3 "3 Office"
 set $ws4 "4"
 set $ws5 "5
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 "8 Anki"
-set $ws9 "9 Note Taking"
-set $ws10 "10 Browsing"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10 Anki"
 
 # Move between workspaces
 bindsym $mod+1 workspace $ws1
@@ -233,7 +231,7 @@ bindsym XF86MonBrightnessUp exec light -A 20
 set $menu wofi --show drun  -i | xargs swaymsg exec --
 
 # Launch your browser:
-bindsym $mod+shift+b exec firefox
+bindsym $mod+shift+b exec brave-browser
 
 # Open a file manager:
 bindsym $mod+e exec nautilus
