@@ -76,7 +76,6 @@ set $lock_screen exec bash ~/.config/sway/lock_screen.sh
 #bindsym $mod+Escape exec $lock_screen
 bindsym $mod+l exec $lock_screen
 
-
 #========================================#
 # Keyboard Shortcuts (Window Management) #
 #========================================#
@@ -134,16 +133,16 @@ bindsym $mod+r mode "resize"
 # Keyboard Shortcuts (Workspaces) #
 #=================================#
 # Switch to workspace
-set $ws1 "1 Vim"
-set $ws2 "2 Zotero"
-set $ws3 "3 Office"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10 Anki"
+set $ws10 "10"
 
 # Move between workspaces
 bindsym $mod+1 workspace $ws1
