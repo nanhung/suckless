@@ -12,7 +12,9 @@ Plug 'easymotion/vim-easymotion' " go to any word quickly '\\w', '\\e', '\\b'
 Plug 'vim-pandoc/vim-pandoc'     " bibliogrophy auto complete in markdown
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'preservim/vim-markdown'    " header jumps :TOC
-" Initialize plugin system
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 call plug#end()
 
 " Theme settings
@@ -69,6 +71,18 @@ map <Leader>kk <C-w>t<C-w>K
 map <Leader>tr :new term://bash<CR>iradian<CR><C-\><C-n><C-w><C-j>k
 map <Leader>tp :new term://bash<CR>ipython3<CR><C-\><C-n><C-w><C-j>k
 map <Leader>tt :new term://bash<CR>i<CR><C-\><C-n><C-w><C-j>k
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>tf <cmd>Telescope find_files<cr>
+nnoremap <leader>tg <cmd>Telescope live_grep<cr>
+nnoremap <leader>tb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 " Alternative method to escape
 set timeoutlen=500
