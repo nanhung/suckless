@@ -1,6 +1,10 @@
 -- https://www.youtube.com/watch?v=zHTeCSVAFNY&list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
+vim.cmd([[
+  set expandtab
+  set tabstop=2
+  set number
+  inoremap <expr> <Tab> pumvisible() ? "\<CR>" : "\<Tab>"
+  ]])
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.g.mapleader = " "
@@ -23,6 +27,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins= {
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "ervandew/supertab"},
   { 'nvim-telescope/telescope.nvim', tag = '0.1.8',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
