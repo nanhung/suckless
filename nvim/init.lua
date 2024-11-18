@@ -1,13 +1,4 @@
 -- https://www.youtube.com/watch?v=zHTeCSVAFNY&list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn
-vim.cmd([[
-  set expandtab
-  set tabstop=2
-  set number
-  inoremap <expr> <Tab> pumvisible() ? "\<CR>" : "\<Tab>"
-  ]])
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
-vim.g.mapleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -25,8 +16,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
+require("vim-options")
 require("lazy").setup("plugins")
-vim.keymap.set('n', '<C-n>', ':Neotree<CR>', {})
 
 

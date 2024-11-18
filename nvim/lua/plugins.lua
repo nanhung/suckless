@@ -1,14 +1,5 @@
 return {
   { "ervandew/supertab"},
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
-    }
-  },
   { "R-nvim/R.nvim", version = '0.1.0'},
   {
     "R-nvim/cmp-r",
