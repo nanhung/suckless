@@ -7,7 +7,7 @@ return {
   config = function()
     require('hop').setup({
       options = {
-        vim.keymap.set('n', '<leader>f', ':HopWord<CR>', {})
+        vim.keymap.set('n', '<leader><leader>', ':HopWord<CR>', {})
       }
     })
   end

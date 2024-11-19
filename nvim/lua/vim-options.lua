@@ -7,6 +7,8 @@ vim.cmd("set relativenumber")
 vim.cmd("set autoindent")
 vim.cmd("set smartindent")
 vim.cmd("set foldmethod=syntax")
+vim.cmd("set colorcolumn=80")
+vim.cmd("set noswapfile")
 
 vim.g.mapleader = " "
 

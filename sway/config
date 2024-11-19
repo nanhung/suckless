@@ -66,10 +66,10 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Escape exec $HOME/.config/sway/exit.sh
 
 # Screen locking (automatic, with a timeout)
-exec swayidle -w \
-    timeout 300 'light -S 10' \
-    timeout 360 'swaylock -c 000000' \
-    before-sleep 'swaylock -c 000000'
+#exec swayidle -w \
+#    timeout 300 'light -S 10' \
+#    timeout 360 'swaylock -c 000000' \
+#    before-sleep 'swaylock -c 000000'
 
 # Screen locking (manual)
 set $lock_screen exec bash ~/.config/sway/lock_screen.sh
@@ -193,7 +193,7 @@ bindsym $mod+Shift+f floating toggle
 bindsym $mod+tab focus mode_toggle
 
 # Move focus to the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 
 #=================================#
@@ -237,7 +237,8 @@ bindsym $mod+e exec nautilus
 
 # Open a terminal emulator:
 set $term foot
-bindsym $mod+t exec $term
+#bindsym $mod+t exec $term
+bindsym $mod+return exec $term
 
 # Kill focused window:
 bindsym $mod+q kill
