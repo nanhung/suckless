@@ -6,6 +6,7 @@ vim.cmd("set number")
 vim.cmd("set relativenumber")
 vim.cmd("set autoindent")
 vim.cmd("set smartindent")
+vim.cmd("set foldmethod=syntax")
 
 vim.g.mapleader = " "
 
@@ -18,8 +19,4 @@ vim.cmd([[
   vnoremap <Right> <ESC>:echoe "Use l"<CR>
   vnoremap <Up>    <ESC>:echoe "Use k"<CR>
   vnoremap <Down>  <ESC>:echoe "Use j"<CR>
-  inoremap <Left>  <ESC>:echoe "Use h"<CR>
-  inoremap <Right> <ESC>:echoe "Use l"<CR>
-  inoremap <Up>    <ESC>:echoe "Use k"<CR>
-  inoremap <Down>  <ESC>:echoe "Use j"<CR>
 ]])
