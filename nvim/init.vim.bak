@@ -1,6 +1,7 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 Plug 'srcery-colors/srcery-vim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'jalvesaq/Nvim-R'               
 Plug 'jalvesaq/R-Vim-runtime'    " indent for pipe
 Plug 'itchyny/lightline.vim'     " minimal status bar
@@ -12,11 +13,15 @@ Plug 'easymotion/vim-easymotion' " go to any word quickly '\\w', '\\e', '\\b'
 Plug 'vim-pandoc/vim-pandoc'     " bibliogrophy auto complete in markdown
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'preservim/vim-markdown'    " header jumps :TOC
-" Initialize plugin system
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-lua/plenary.nvim'
+Plug 'preservim/nerdtree'        " File explore
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' } " Find 
 call plug#end()
 
 " Theme settings
 colorscheme srcery
+" colorscheme catppuccin
 set background=dark " for the dark version
 set termguicolors " fg and bg highlighting requires compatible terminal colors
 
@@ -70,8 +75,20 @@ map <Leader>tr :new term://bash<CR>iradian<CR><C-\><C-n><C-w><C-j>k
 map <Leader>tp :new term://bash<CR>ipython3<CR><C-\><C-n><C-w><C-j>k
 map <Leader>tt :new term://bash<CR>i<CR><C-\><C-n><C-w><C-j>k
 
-" Alternative method to escape
-set timeoutlen=500
+" Find files using Telescope command-line sugar.
+nnoremap <leader>tf <cmd>Telescope find_files<cr>
+nnoremap <leader>tg <cmd>Telescope live_grep<cr>
+nnoremap <leader>tb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+" NERDTree
+nnoremap <C-n> :NERDTree<CR>
 
 " set vim-r-plugin to 
 let r_indent_align_args = 0
@@ -84,3 +101,12 @@ let r_syntax_folding = 1 "zR: Open all, zM: Close all , zc: close current
 let R_assign = 0
 let R_set_omnifunc = ["r",  "rmd", "quarto", "rnoweb", "rhelp", "rrst"]
 
+" Motion restrict 
+nnoremap <Left>  :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up>    :echoe "Use k"<CR>
+nnoremap <Down>  :echoe "Use j"<CR>
+vnoremap <Left>  :echoe "Use h"<CR>
+vnoremap <Right> :echoe "Use l"<CR>
+vnoremap <Up>    :echoe "Use k"<CR>
+vnoremap <Down>  :echoe "Use j"<CR>

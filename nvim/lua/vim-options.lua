@@ -17,8 +17,8 @@ vim.cmd([[
   nnoremap <Right> :echoe "Use l"<CR>
   nnoremap <Up>    :echoe "Use k"<CR>
   nnoremap <Down>  :echoe "Use j"<CR>
-  vnoremap <Left>  <ESC>:echoe "Use h"<CR>
-  vnoremap <Right> <ESC>:echoe "Use l"<CR>
-  vnoremap <Up>    <ESC>:echoe "Use k"<CR>
-  vnoremap <Down>  <ESC>:echoe "Use j"<CR>
+  vnoremap <Left>  :echoe "Use h"<CR>
+  vnoremap <Right> :echoe "Use l"<CR>
+  vnoremap <Up>    :echoe "Use k"<CR>
+  vnoremap <Down>  :echoe "Use j"<CR>
 ]])
