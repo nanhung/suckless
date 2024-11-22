@@ -25,6 +25,11 @@ colorscheme srcery
 set background=dark " for the dark version
 set termguicolors " fg and bg highlighting requires compatible terminal colors
 
+" Status bar
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+
 " General settings
 " The backspace key has slightly unintuitive behavior by default. For example,
 " by default, you can't backspace before the insertion point set with 'i'.
