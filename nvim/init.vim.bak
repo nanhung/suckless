@@ -25,7 +25,7 @@ colorscheme srcery
 set background=dark " for the dark version
 set termguicolors " fg and bg highlighting requires compatible terminal colors
 
-" Status bar
+" status bar
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }

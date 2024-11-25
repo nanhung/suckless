@@ -2,10 +2,11 @@ return {
   { 'shaunsingh/nord.nvim', enabled = false, lazy = false, priority = 1000 },
   { 'folke/tokyonight.nvim', enabled = false, lazy = false, priority = 1000 },
   { 'EdenEast/nightfox.nvim', enabled = false, lazy = false, priority = 1000 },
+  { 'srcery-colors/srcery-vim', enabled = false, lazy = false, priority = 1000 },
   {
     'catppuccin/nvim',
     name = 'catppuccin',
-    enabled = false,
+    enabled = true,
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
@@ -32,7 +33,7 @@ return {
 
   {
     'rebelot/kanagawa.nvim',
-    enabled = true,
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
@@ -50,6 +51,17 @@ return {
       vim.cmd.colorscheme 'kanagawa'
       vim.api.nvim_set_hl(0, 'TermCursor', { fg = '#A6E3A1', bg = '#A6E3A1' })
     end,
+  },
+  {
+      "tiagovla/tokyodark.nvim",
+      enabled = false,
+      opts = {
+          -- custom options here
+      },
+      config = function(_, opts)
+          require("tokyodark").setup(opts) -- calling setup is optional
+          vim.cmd [[colorscheme tokyodark]]
+      end,
   },
 
   {

@@ -1,4 +1,4 @@
--- https://www.youtube.com/watch?v=zHTeCSVAFNY&list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn
+-- https://www.youtube.com/watch?v=zHTeCSVAFNY&list=PLsz01TDipIffreIaUNk64KxTIkQaGguqn
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
