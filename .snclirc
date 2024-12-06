@@ -1,0 +1,23 @@
+[sncli]
+cfg_sn_username = d99622005@ntu
+cfg_sn_password = snCLI-0.4.2
+
+# as an alternate to cfg_sn_password you could use the following config item
+# any shell command can be used; its stdout is used for the password
+# trailing newlines are stripped for ease of use
+# note: if both password config are given, cfg_sn_password will be used
+cfg_sn_password_eval = gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/.sncli-pass.gpg
+
+# see http://urwid.org/manual/userinput.html for examples of more key combinations
+kb_edit_note = space
+kb_page_down = ctrl f
+
+# note that values must not be quoted
+clr_note_focus_bg = light blue
+
+# if this editor config value is not provided, the $EDITOR env var will be used instead
+# warning: if neither $EDITOR or cfg_editor is set, it will be impossible to edit notes
+cfg_editor = nvim
+
+# this is also supported for the pager:
+cfg_pager = less -c +{line} -N {fname}
