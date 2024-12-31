@@ -1,0 +1,29 @@
+[Data Source]
+DisplayName=d99622005@gmail.com
+Enabled=true
+Parent=b3aaa7dc0bd0717609be0392a122a4026bd4938b
+
+[Mail Submission]
+SentFolder=folder://local/Sent
+TransportUid=bc92c979307f43e3ccf8aaf5fe5a9d7820a1d4a2
+RepliesToOriginFolder=false
+UseSentFolder=true
+
+[Mail Composition]
+Bcc=
+Cc=
+DraftsFolder=folder://5ce43341f0c01da5f6d138ed85ac2fc7062c879b/%5bGmail%5d/Drafts
+ReplyStyle=default
+SignImip=true
+TemplatesFolder=
+StartBottom=inconsistent
+TopSignature=inconsistent
+Language=
+
+[Mail Identity]
+Address=d99622005@gmail.com
+Aliases=
+Name=
+Organization=
+ReplyTo=
+SignatureUid=none
