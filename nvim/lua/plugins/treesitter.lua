@@ -1,20 +1,10 @@
 return {
-  "nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate",
-  config = function()
-    local config = require("nvim-treesitter.configs")
-    config.setup({
-      auto_install = true,
-      ensure_instlled = {
-        "lua",
-        "r",
-        "markdown",
-        "markdown_inline",
-        "rnoweb",
-        "yaml",
-        "python",
-      },
-      highlight = { enable = true },
-    })
-  end,
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function ()
+        require("nvim-treesitter.configs").setup({
+            ensure_installed = { "markdown", "markdown_inline", "r", "rnoweb", "yaml", "csv" },
+            highlight = { enable = true },
+        })
+    end
 }
