@@ -2,7 +2,7 @@ return {
 	{
 		"R-nvim/R.nvim",
     lazy = false,
-    version = "~0.1.0"
+    version = "0.99.1"
 	},
 	{
 		"R-nvim/cmp-r",
