@@ -22,3 +22,4 @@ vim.cmd([[
   vnoremap <Up>    :echoe "Use k"<CR>
   vnoremap <Down>  :echoe "Use j"<CR>
 ]])
+

@@ -23,7 +23,8 @@ return {
       vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, {}) -- sudo install ripgrep
       vim.keymap.set("n", "<leader>fo", builtin.oldfiles, {})
-      vim.keymap.set('n', '<C-t>', ':Telescope heading<CR>', {})
+      vim.keymap.set('n', '<leader>fh', ':Telescope heading<CR>', {})
+      vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>', {})
       require("telescope").load_extension("ui-select")
       require("telescope").load_extension("heading") -- Note `:set ft=markdown` for rmarkdown file 
     end,
