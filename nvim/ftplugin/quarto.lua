@@ -28,7 +28,7 @@ vim.api.nvim_set_hl(0, '@markup.codecell', {
   link = 'CursorLine',
 })
 
-vim.cmd("set fo+=a")
+vim.cmd("set fo+=a") -- use set fo= to disable automatic paragraph reflowing
 vim.cmd("set ft=markdown")
 
 print("this is quarto")
