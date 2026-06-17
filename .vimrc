@@ -3,6 +3,8 @@
 set background=dark
 colorscheme retrobox
 
+" git clone https://github.com/easymotion/vim-easymotion.git ~/.vim/pack/plugins/start/vim-easymotion
+
 " gitclone https://github.com/airblade/vim-gitgutter.git ~/.vim/pack/airblade/start/vim-gitgutter
 " vim -u NONE -c "helptags vim-gitgutter/doc" -c q
 
