@@ -16,6 +16,10 @@ colorscheme retrobox
 let g:vimwiki_list = [{ 'syntax': 'markdown', 
                   \ 'ext': 'md',
                   \ 'path': '~/just-keep-writing/P-notes/'}]
+" VWS <searh term>
+" lne next 
+" lp  previous
+" @: to find next
 
 " If you open this file in Vim, it'll be syntax highlighted for you.
 
