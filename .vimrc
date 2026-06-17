@@ -3,8 +3,14 @@
 set background=dark
 colorscheme retrobox
 
-"git clone https://github.com/vimwiki/vimwiki.git ~/.vim/pack/plugins/start/vimwiki
-"vim -c 'helptags ~/.vim/pack/plugins/start/vimwiki/doc' -c quit
+" gitclone https://github.com/airblade/vim-gitgutter.git ~/.vim/pack/airblade/start/vim-gitgutter
+" vim -u NONE -c "helptags vim-gitgutter/doc" -c q
+
+" git clone https://github.com/preservim/nerdtree.git ~/.vim/pack/vendor/start/nerdtree
+" vim -u NONE -c "helptags ~/.vim/pack/vendor/start/nerdtree/doc" -c q
+
+" git clone https://github.com/vimwiki/vimwiki.git ~/.vim/pack/plugins/start/vimwiki
+" vim -c 'helptags ~/.vim/pack/plugins/start/vimwiki/doc' -c quit
 let g:vimwiki_list = [{ 'syntax': 'markdown', 
                   \ 'ext': 'md',
                   \ 'path': '~/just-keep-writing/P-notes/'}]
@@ -30,6 +36,8 @@ filetype plugin on
 
 syntax on
 
+set updatetime=100  	          " set update time for gitgutter update
+
 "se a line cursor within insert mode and a block cursor everywhere else.
 "
 "" Reference chart of values:
@@ -54,6 +62,7 @@ set relativenumber
 " Always show the status line at the bottom, even if you only have one window open.
 set laststatus=2
 
+" Don't use swap file
 set noswapfile
 
 " The backspace key has slightly unintuitive behavior by default. For example,
