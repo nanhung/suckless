@@ -1,5 +1,11 @@
 " Comments in Vimscript start with a `"`.
 
+"git clone https://github.com/vimwiki/vimwiki.git ~/.vim/pack/plugins/start/vimwiki
+"vim -c 'helptags ~/.vim/pack/plugins/start/vimwiki/doc' -c quit
+let g:vimwiki_list = [{ 'syntax': 'markdown', 
+                  \ 'ext': 'md',
+                  \ 'path': '~/just-keep-writing/P-notes/'}]
+
 " If you open this file in Vim, it'll be syntax highlighted for you.
 
 " Vim is based on Vi. Setting `nocompatible` switches from the default
@@ -17,10 +23,22 @@ set shortmess+=I
 " Show line numbers.
 set number
 
-" Enable syntax highlighting
-if has('syntax')
-  syntax on
-endif
+filetype plugin on
+
+syntax on
+
+"se a line cursor within insert mode and a block cursor everywhere else.
+"
+"" Reference chart of values:
+"   Ps = 0  -> blinking block.
+"   "   Ps = 1  -> blinking block (default).
+"   "   Ps = 2  -> steady block.
+"   "   Ps = 3  -> blinking underline.
+"   "   Ps = 4  -> steady underline.
+"   "   Ps = 5  -> blinking bar (xterm).
+"   "   Ps = 6  -> steady bar (xterm).
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
 
 " This enables relative line numbering mode. With both number and
 " relativenumber enabled, the current line shows the true line number, while
@@ -76,7 +94,7 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up>    :echoe "Use k"<CR>
 nnoremap <Down>  :echoe "Use j"<CR>
 " ...and in insert mode
-inoremap <Left>  <ESC>:echoe "Use h"<CR>
-inoremap <Right> <ESC>:echoe "Use l"<CR>
-inoremap <Up>    <ESC>:echoe "Use k"<CR>
-inoremap <Down>  <ESC>:echoe "Use j"<CR>
+"inoremap <Left>  <ESC>:echoe "Use h"<CR>
+"inoremap <Right> <ESC>:echoe "Use l"<CR>
+"inoremap <Up>    <ESC>:echoe "Use k"<CR>
+"inoremap <Down>  <ESC>:echoe "Use j"<CR>
