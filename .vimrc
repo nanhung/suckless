@@ -1,5 +1,8 @@
 " Comments in Vimscript start with a `"`.
 
+set background=dark
+colorscheme retrobox
+
 "git clone https://github.com/vimwiki/vimwiki.git ~/.vim/pack/plugins/start/vimwiki
 "vim -c 'helptags ~/.vim/pack/plugins/start/vimwiki/doc' -c quit
 let g:vimwiki_list = [{ 'syntax': 'markdown', 
@@ -50,6 +53,8 @@ set relativenumber
 
 " Always show the status line at the bottom, even if you only have one window open.
 set laststatus=2
+
+set noswapfile
 
 " The backspace key has slightly unintuitive behavior by default. For example,
 " by default, you can't backspace before the insertion point set with 'i'.
