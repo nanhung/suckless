@@ -9,8 +9,8 @@ set clipboard+=unnamedplus
 " git clone https://github.com/christoomey/vim-system-copy.git ~/.vim/pack/plugins/start/vim-system-copy
 " us cp to copy the selection
 
-" git clone https://github.com/karoliskoncevicius/goyo.vim.git ~/.vim/pack/plugins/start/goyo
-" git clone https://github.com/karoliskoncevicius/limelight.git ~/.vim/pack/plugins/start/limelight
+" git clone https://github.com/junegunn/goyo.vim.git ~/.vim/pack/plugins/start/goyo
+" git clone https://github.com/junegunn/limelight.git ~/.vim/pack/plugins/start/limelight
 " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
@@ -20,7 +20,7 @@ let g:limelight_conceal_guifg = '#777777'
 
 " git clone https://github.com/karoliskoncevicius/vim-sendtowindow.git ~/.vim/pack/plugins/start/vim-sendtowindow
 " git clone https://github.com/easymotion/vim-easymotion.git ~/.vim/pack/plugins/start/vim-easymotion
-" gitclone https://github.com/airblade/vim-gitgutter.git ~/.vim/pack/airblade/start/vim-gitgutter
+" git clone https://github.com/airblade/vim-gitgutter.git ~/.vim/pack/airblade/start/vim-gitgutter
 " vim -u NONE -c "helptags vim-gitgutter/doc" -c q
 
 " git clone https://github.com/preservim/nerdtree.git ~/.vim/pack/vendor/start/nerdtree
