@@ -1,4 +1,6 @@
 " Comments in Vimscript start with a `"`.
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin()
 Plug 'vimwiki/vimwiki'
 Plug 'junegunn/goyo.vim'
@@ -7,18 +9,23 @@ Plug 'tpope/vim-fugitive'        		" allows git commands in vim session
 Plug 'airblade/vim-gitgutter'    		" show git changes in gutter
 Plug 'easymotion/vim-easymotion' 		" go to any word quickly '\\w', '\\e', '\\b'
 Plug 'preservim/nerdtree'        		" File explore
+Plug 'preservim/vim-markdown'
 Plug 'karoliskoncevicius/vim-sendtowindow'
+Plug 'christoomey/vim-system-copy'
 call plug#end()
 
 " Scroll terminal <C-w>N
 set background=dark
 colorscheme retrobox
 set clipboard+=unnamedplus 
-nnoremap Q vipJ
+nnoremap Q vipJjj
 
 let g:vimwiki_list = [{ 'syntax': 'markdown', 
                   \ 'ext': 'md',
                   \ 'path': '~/just-keep-writing/P-notes/'}]
+
+let g:vim_markdown_toc_autofit = 1
+
 " VWS <searh term>
 " lne:   next 
 " lp:    previous
