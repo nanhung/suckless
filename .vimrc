@@ -1,30 +1,21 @@
 " Comments in Vimscript start with a `"`.
-" Scroll terminal <C-w>N
+call plug#begin()
+Plug 'vimwiki/vimwiki'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'tpope/vim-fugitive'        		" allows git commands in vim session
+Plug 'airblade/vim-gitgutter'    		" show git changes in gutter
+Plug 'easymotion/vim-easymotion' 		" go to any word quickly '\\w', '\\e', '\\b'
+Plug 'preservim/nerdtree'        		" File explore
+Plug 'karoliskoncevicius/vim-sendtowindow'
+call plug#end()
 
+" Scroll terminal <C-w>N
 set background=dark
 colorscheme retrobox
 set clipboard+=unnamedplus 
 nnoremap Q vipJ
 
-" git clone https://github.com/christoomey/vim-system-copy.git ~/.vim/pack/plugins/start/vim-system-copy
-" us cp to copy the selection
-
-" git clone https://github.com/karoliskoncevicius/goyo.vim.git ~/.vim/pack/plugins/start/goyo
-" git clone https://github.com/karoliskoncevicius/limelight.git ~/.vim/pack/plugins/start/limelight
-" Color name (:help cterm-colors) or ANSI code
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
-" Color name (:help gui-colors) or RGB color
-let g:limelight_conceal_guifg = 'DarkGray'
-let g:limelight_conceal_guifg = '#777777'
-
-" git clone https://github.com/karoliskoncevicius/vim-sendtowindow.git ~/.vim/pack/plugins/start/vim-sendtowindow
-" git clone https://github.com/easymotion/vim-easymotion.git ~/.vim/pack/plugins/start/vim-easymotion
-" gitclone https://github.com/airblade/vim-gitgutter.git ~/.vim/pack/airblade/start/vim-gitgutter
-" vim -u NONE -c "helptags vim-gitgutter/doc" -c q
-
-" git clone https://github.com/vimwiki/vimwiki.git ~/.vim/pack/plugins/start/vimwiki
-" vim -c 'helptags ~/.vim/pack/plugins/start/vimwiki/doc' -c quit
 let g:vimwiki_list = [{ 'syntax': 'markdown', 
                   \ 'ext': 'md',
                   \ 'path': '~/just-keep-writing/P-notes/'}]
