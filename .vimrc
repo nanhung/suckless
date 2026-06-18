@@ -5,7 +5,7 @@ set background=dark
 colorscheme retrobox
 set clipboard+=unnamedplus 
 
-" git clone https://github.com/ctrlpvim/ctrlp.git ~/.vim/pack/plugins/start/ctrlp
+" git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.vim/pack/plugins/start/ctrlp
 " git clone https://github.com/christoomey/vim-system-copy.git ~/.vim/pack/plugins/start/vim-system-copy
 " us cp to copy the selection
 
