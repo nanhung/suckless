@@ -10,7 +10,7 @@ set clipboard+=unnamedplus
 " us cp to copy the selection
 
 " git clone https://github.com/junegunn/goyo.vim.git ~/.vim/pack/plugins/start/goyo
-" git clone https://github.com/junegunn/limelight.git ~/.vim/pack/plugins/start/limelight
+" git clone https://github.com/junegunn/limelight.vim.git ~/.vim/pack/plugins/start/limelight
 " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
