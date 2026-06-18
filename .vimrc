@@ -1,29 +1,25 @@
 " Comments in Vimscript start with a `"`.
+" Scroll terminal <C-w>N
 
 set background=dark
 colorscheme retrobox
-
-" git clone https://github.com/christoomey/vim-system-copy.git ~/.vim/pack/plugins/start/vim-system-copy
-" us cp to copy the selection
 set clipboard+=unnamedplus 
 
-" Scroll terminal <C-w>N
+" git clone https://github.com/ctrlpvim/ctrlp.git ~/.vim/pack/plugins/start/ctrlp
+" git clone https://github.com/christoomey/vim-system-copy.git ~/.vim/pack/plugins/start/vim-system-copy
+" us cp to copy the selection
 
 " git clone https://github.com/karoliskoncevicius/goyo.vim.git ~/.vim/pack/plugins/start/goyo
 " git clone https://github.com/karoliskoncevicius/limelight.git ~/.vim/pack/plugins/start/limelight
-
 " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
-
 " Color name (:help gui-colors) or RGB color
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
 
 " git clone https://github.com/karoliskoncevicius/vim-sendtowindow.git ~/.vim/pack/plugins/start/vim-sendtowindow
-
 " git clone https://github.com/easymotion/vim-easymotion.git ~/.vim/pack/plugins/start/vim-easymotion
-
 " gitclone https://github.com/airblade/vim-gitgutter.git ~/.vim/pack/airblade/start/vim-gitgutter
 " vim -u NONE -c "helptags vim-gitgutter/doc" -c q
 
