@@ -8,8 +8,8 @@ Plug 'junegunn/limelight.vim'
 Plug 'tpope/vim-fugitive'        		" allows git commands in vim session
 Plug 'airblade/vim-gitgutter'    		" show git changes in gutter
 Plug 'easymotion/vim-easymotion' 		" go to any word quickly '\\w', '\\e', '\\b'
-Plug 'preservim/nerdtree'        		" File explore
-Plug 'preservim/vim-markdown'
+Plug 'preservim/nerdtree'        " File explore
+Plug 'preservim/vim-markdown'    " :Toc
 Plug 'karoliskoncevicius/vim-sendtowindow'
 Plug 'christoomey/vim-system-copy'
 call plug#end()
