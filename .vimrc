@@ -18,11 +18,11 @@ call plug#end()
 set background=dark
 colorscheme retrobox
 set clipboard+=unnamedplus 
-nnoremap Q vipJ
+nnoremap Q vipJjj
 
 let g:vimwiki_list = [{ 'syntax': 'markdown', 
                   \ 'ext': 'md',
-                  \ 'path': '~/just-keep-writing/'}]
+                  \ 'path': '~/just-keep-writing/P-notes/'}]
 
 let g:vim_markdown_toc_autofit = 1
 
