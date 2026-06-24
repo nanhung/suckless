@@ -1,22 +1,27 @@
 " Comments in Vimscript start with a `"`.
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin()
 Plug 'vimwiki/vimwiki'
 Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
 Plug 'tpope/vim-fugitive'        		" allows git commands in vim session
 Plug 'airblade/vim-gitgutter'    		" show git changes in gutter
 Plug 'easymotion/vim-easymotion' 		" go to any word quickly '\\w', '\\e', '\\b'
+Plug 'christoomey/vim-system-copy'
 call plug#end()
 
 " Scroll terminal <C-w>N
 set background=dark
 colorscheme retrobox
 set clipboard+=unnamedplus 
-nnoremap Q vipJ
+nnoremap Q vipJjj
 
 let g:vimwiki_list = [{ 'syntax': 'markdown', 
                   \ 'ext': 'md',
                   \ 'path': '~/just-keep-writing/P-notes/'}]
+
+let g:vim_markdown_toc_autofit = 1
+
 " VWS <searh term>
 " lne:   next 
 " lp:    previous
@@ -68,6 +73,8 @@ let &t_EI = "\e[2 q"
 " jump up or down to a particular line, by {count}k to go up or {count}j to go
 " down.
 set relativenumber
+
+set colorcolumn=80              " vertical line to indicate line number
 
 " Always show the status line at the bottom, even if you only have one window open.
 set laststatus=2
