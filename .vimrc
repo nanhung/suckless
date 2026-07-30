@@ -4,10 +4,7 @@
 call plug#begin()
 Plug 'vimwiki/vimwiki'
 Plug 'junegunn/goyo.vim'
-Plug 'tpope/vim-fugitive'        		" allows git commands in vim session
-Plug 'airblade/vim-gitgutter'    		" show git changes in gutter
-Plug 'easymotion/vim-easymotion' 		" go to any word quickly '\\w', '\\e', '\\b'
-Plug 'christoomey/vim-system-copy'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " Scroll terminal <C-w>N
