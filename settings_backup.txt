@@ -1,0 +1,316 @@
+[apps/seahorse/listing]
+keyrings-selected=['secret-service:///org/freedesktop/secrets/collection/login']
+
+[apps/seahorse/windows/key-manager]
+height=476
+width=600
+
+[org/gnome/Snapshot]
+is-maximized=false
+window-height=640
+window-width=800
+
+[org/gnome/Weather]
+locations=[<(uint32 2, <('Sacramento Executive Airport', 'KSAC', false, [(0.67207295768107522, -2.1204877747105106)], @a(dd) [])>)>]
+window-height=494
+window-maximized=false
+window-width=465
+
+[org/gnome/baobab/ui]
+is-maximized=false
+window-size=(960, 600)
+
+[org/gnome/clocks]
+world-clocks=@aa{sv} []
+
+[org/gnome/clocks/state/window]
+maximized=false
+panel-id='world'
+size=(870, 690)
+
+[org/gnome/control-center]
+last-panel='keyboard'
+window-state=(980, 640, false)
+
+[org/gnome/desktop/a11y]
+always-show-universal-access-status=true
+
+[org/gnome/desktop/a11y/applications]
+screen-magnifier-enabled=false
+
+[org/gnome/desktop/a11y/interface]
+high-contrast=false
+show-status-shapes=false
+
+[org/gnome/desktop/a11y/magnifier]
+mag-factor=1.0
+
+[org/gnome/desktop/app-folders]
+folder-children=['System', 'Utilities', 'YaST', 'Pardus']
+
+[org/gnome/desktop/app-folders/folders/Pardus]
+categories=['X-Pardus-Apps']
+name='X-Pardus-Apps.directory'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/System]
+apps=['nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.DiskUtility.desktop', 'im-config.desktop', 'org.gnome.Logs.desktop', 'org.freedesktop.MalcontentControl.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.SystemMonitor.desktop']
+name='X-GNOME-Shell-System.directory'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/Utilities]
+apps=['org.gnome.Connections.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.font-viewer.desktop', 'org.gnome.Loupe.desktop', 'org.gnome.seahorse.Application.desktop']
+name='X-GNOME-Shell-Utilities.directory'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/YaST]
+categories=['X-SuSE-YaST']
+name='suse-yast.directory'
+translate=true
+
+[org/gnome/desktop/background]
+color-shading-type='solid'
+picture-options='zoom'
+picture-uri='file:///usr/share/backgrounds/gnome/blobs-l.svg'
+picture-uri-dark='file:///usr/share/backgrounds/gnome/blobs-d.svg'
+primary-color='#241f31'
+secondary-color='#000000'
+
+[org/gnome/desktop/break-reminders]
+selected-breaks=@as []
+
+[org/gnome/desktop/break-reminders/eyesight]
+play-sound=true
+
+[org/gnome/desktop/break-reminders/movement]
+duration-seconds=uint32 300
+interval-seconds=uint32 1800
+play-sound=true
+
+[org/gnome/desktop/input-sources]
+mru-sources=[('xkb', 'us')]
+sources=[('xkb', 'us')]
+xkb-options=['caps:escape']
+
+[org/gnome/desktop/interface]
+accent-color='blue'
+color-scheme='prefer-dark'
+enable-animations=true
+gtk-theme='Adwaita-dark'
+icon-theme='MoreWaita'
+overlay-scrolling=true
+text-scaling-factor=1.25
+toolkit-accessibility=false
+
+[org/gnome/desktop/notifications]
+application-children=['org-gnome-software', 'gnome-power-panel', 'firefox-esr', 'org-gnome-terminal-preferences', 'io-github-focustimerhq-focustimer', 'org-gnome-settings', 'org-gnome-evolution']
+
+[org/gnome/desktop/notifications/application/firefox-esr]
+application-id='firefox-esr.desktop'
+
+[org/gnome/desktop/notifications/application/gnome-power-panel]
+application-id='gnome-power-panel.desktop'
+
+[org/gnome/desktop/notifications/application/io-github-focustimerhq-focustimer]
+application-id='io.github.focustimerhq.FocusTimer.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-evolution]
+application-id='org.gnome.Evolution.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-settings]
+application-id='org.gnome.Settings.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-software]
+application-id='org.gnome.Software.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-terminal-preferences]
+application-id='org.gnome.Terminal.Preferences.desktop'
+
+[org/gnome/desktop/peripherals/touchpad]
+two-finger-scrolling-enabled=true
+
+[org/gnome/desktop/screen-time-limits]
+daily-limit-enabled=false
+
+[org/gnome/desktop/screensaver]
+color-shading-type='solid'
+picture-options='zoom'
+picture-uri='file:///usr/share/backgrounds/gnome/blobs-l.svg'
+primary-color='#241f31'
+secondary-color='#000000'
+
+[org/gnome/desktop/session]
+idle-delay=uint32 600
+
+[org/gnome/desktop/wm/keybindings]
+show-desktop=['<Super>d']
+switch-to-workspace-left=['<Control><Super>Left']
+switch-to-workspace-right=['<Control><Super>Right']
+
+[org/gnome/evince/default]
+continuous=true
+dual-page=false
+dual-page-odd-left=false
+enable-spellchecking=true
+fullscreen=false
+inverted-colors=false
+show-sidebar=true
+sidebar-page='links'
+sidebar-size=148
+sizing-mode='free'
+zoom=1.4399999999999995
+
+[org/gnome/evolution-data-server]
+migrated=true
+
+[org/gnome/evolution]
+version='3.56.2'
+
+[org/gnome/evolution/calendar]
+week-start-day-name='monday'
+work-day-friday=true
+work-day-monday=true
+work-day-saturday=false
+work-day-sunday=false
+work-day-thursday=true
+work-day-tuesday=true
+work-day-wednesday=true
+
+[org/gnome/evolution/mail]
+browser-close-on-reply-policy='ask'
+forward-style-name='attached'
+hpaned-size=1500000
+image-loading-policy='never'
+junk-check-custom-header=true
+junk-empty-on-exit-days=0
+junk-lookup-addressbook=false
+layout=1
+message-list-sort-on-header-click='always'
+paned-size=1117419
+reply-style-name='quoted'
+to-do-bar-width=1150000
+trash-empty-on-exit-days=0
+
+[org/gnome/evolution/shell]
+default-component-id='mail'
+
+[org/gnome/evolution/shell/window]
+height=900
+maximized=true
+width=1440
+x=0
+y=0
+
+[org/gnome/gnome-system-monitor]
+current-tab='processes'
+maximized=false
+show-dependencies=false
+show-whose-processes='user'
+window-height=720
+window-width=800
+
+[org/gnome/gnome-system-monitor/proctree]
+col-26-visible=false
+col-26-width=0
+columns-order=[0, 12, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+sort-col=0
+sort-order=0
+
+[org/gnome/maps]
+last-viewed-location=[38.602425629550034, -121.37958146242073]
+map-type='MapsVectorSource'
+transportation-type='pedestrian'
+window-maximized=true
+zoom-level=17
+
+[org/gnome/mutter]
+workspaces-only-on-primary=false
+
+[org/gnome/nautilus/preferences]
+default-folder-viewer='icon-view'
+migrated-gtk-settings=true
+search-filter-time-type='last_modified'
+
+[org/gnome/nautilus/window-state]
+initial-size=(890, 550)
+initial-size-file-chooser=(890, 550)
+
+[org/gnome/portal/filechooser/org.zotero.Zotero]
+last-folder-path='/home/nan/Dropbox (Maestral)/zotero pdf'
+
+[org/gnome/portal/filechooser/rstudio]
+last-folder-path='/home/nan/sheds'
+
+[org/gnome/portal/filechooser/zettlr]
+last-folder-path='/home/nan/just-keep-writing'
+
+[org/gnome/power-manager]
+info-history-type='charge'
+info-last-device='/org/freedesktop/UPower/devices/battery_BAT0'
+info-stats-type='discharge-accuracy'
+
+[org/gnome/settings-daemon/plugins/color]
+night-light-enabled=true
+night-light-last-coordinates=(38.608890496893032, -121.379)
+night-light-schedule-automatic=false
+night-light-schedule-from=19.0
+night-light-schedule-to=5.0
+night-light-temperature=uint32 2700
+
+[org/gnome/settings-daemon/plugins/media-keys]
+decrease-text-size=['<Alt><Super>comma']
+home=['<Super>e']
+increase-text-size=['<Alt><Super>period']
+
+[org/gnome/settings-daemon/plugins/power]
+sleep-inactive-ac-timeout=2700
+
+[org/gnome/shell]
+app-picker-layout=[{'org.gnome.Decibels.desktop': <{'position': <0>}>, 'org.gnome.Contacts.desktop': <{'position': <1>}>, 'org.gnome.Weather.desktop': <{'position': <2>}>, 'org.gnome.clocks.desktop': <{'position': <3>}>, 'org.gnome.Maps.desktop': <{'position': <4>}>, 'org.gnome.Music.desktop': <{'position': <5>}>, 'simple-scan.desktop': <{'position': <6>}>, 'org.gnome.Settings.desktop': <{'position': <7>}>, 'btop.desktop': <{'position': <8>}>, 'org.gnome.Totem.desktop': <{'position': <9>}>, 'org.gnome.Snapshot.desktop': <{'position': <10>}>, 'org.gnome.Characters.desktop': <{'position': <11>}>, 'Utilities': <{'position': <12>}>, 'System': <{'position': <13>}>, 'org.gnome.Calculator.desktop': <{'position': <14>}>, 'org.gnome.Tour.desktop': <{'position': <15>}>, 'yelp.desktop': <{'position': <16>}>, 'org.gnome.Calendar.desktop': <{'position': <17>}>, 'cliamp.desktop': <{'position': <18>}>, 'org.gnome.Evolution.desktop': <{'position': <19>}>, 'org.fcitx.Fcitx5.desktop': <{'position': <20>}>, 'fcitx5-configtool.desktop': <{'position': <21>}>, 'org.fcitx.fcitx5-migrator.desktop': <{'position': <22>}>, 'org.gnome.Nautilus.desktop': <{'position': <23>}>}, {'gdebi.desktop': <{'position': <0>}>, 'google-chrome.desktop': <{'position': <1>}>, 'jupyter-notebook.desktop': <{'position': <2>}>, 'kbd-layout-viewer5.desktop': <{'position': <3>}>, 'libreoffice-startcenter.desktop': <{'position': <4>}>, 'libreoffice-draw.desktop': <{'position': <5>}>, 'libreoffice-impress.desktop': <{'position': <6>}>, 'org.gnome.PowerStats.desktop': <{'position': <7>}>, 'R.desktop': <{'position': <8>}>, 'org.gnome.Shotwell.desktop': <{'position': <9>}>, 'org.gnome.Software.desktop': <{'position': <10>}>, 'org.gnome.SoundRecorder.desktop': <{'position': <11>}>, 'spotify.desktop': <{'position': <12>}>, 'org.gnome.TextEditor.desktop': <{'position': <13>}>, 'debian-uxterm.desktop': <{'position': <14>}>, 'vim.desktop': <{'position': <15>}>, 'code.desktop': <{'position': <16>}>, 'debian-xterm.desktop': <{'position': <17>}>, 'firefox-esr.desktop': <{'position': <18>}>}]
+favorite-apps=['io.github.focustimerhq.FocusTimer.desktop', 'libreoffice-writer.desktop', 'libreoffice-calc.desktop', 'rstudio.desktop', 'org.gnome.Terminal.desktop', 'zettlr.desktop', 'org.zotero.Zotero.desktop', 'brave-browser.desktop', 'microsoft-edge.desktop']
+welcome-dialog-last-shown-version='48.7'
+
+[org/gnome/shell/weather]
+automatic-location=true
+locations=[<(uint32 2, <('Sacramento Executive Airport', 'KSAC', false, [(0.67207295768107522, -2.1204877747105106)], @a(dd) [])>)>]
+
+[org/gnome/shell/world-clocks]
+locations=@av []
+
+[org/gnome/software]
+check-timestamp=int64 1785525722
+first-run=false
+flatpak-purge-timestamp=int64 1785466616
+install-timestamp=int64 1785458155
+packagekit-historical-updates-timestamp=uint64 1785454740
+security-timestamp=int64 1785378996759171
+update-notification-timestamp=int64 1785459424
+
+[org/gnome/system/location]
+enabled=false
+
+[org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+background-color='rgb(23,20,33)'
+default-size-rows=40
+font='AdwaitaMono Nerd Font Mono 12'
+foreground-color='rgb(208,207,204)'
+use-system-font=true
+use-theme-colors=true
+
+[org/gtk/gtk4/settings/file-chooser]
+show-hidden=false
+sort-directories-first=false
+
+[org/gtk/settings/file-chooser]
+date-format='regular'
+location-mode='path-bar'
+show-hidden=false
+show-size-column=true
+show-type-column=true
+sidebar-width=157
+sort-column='name'
+sort-directories-first=false
+sort-order='ascending'
+type-format='category'
+window-position=(26, 23)
+window-size=(1231, 902)
