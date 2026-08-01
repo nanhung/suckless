@@ -93,7 +93,7 @@ sources=[('xkb', 'us')]
 xkb-options=['caps:escape']
 
 [org/gnome/desktop/interface]
-accent-color='blue'
+accent-color='orange'
 color-scheme='prefer-dark'
 enable-animations=true
 gtk-theme='Adwaita-dark'
@@ -103,7 +103,7 @@ text-scaling-factor=1.25
 toolkit-accessibility=false
 
 [org/gnome/desktop/notifications]
-application-children=['org-gnome-software', 'gnome-power-panel', 'firefox-esr', 'org-gnome-terminal-preferences', 'io-github-focustimerhq-focustimer', 'org-gnome-settings', 'org-gnome-evolution']
+application-children=['org-gnome-software', 'gnome-power-panel', 'firefox-esr', 'org-gnome-terminal-preferences', 'io-github-focustimerhq-focustimer', 'org-gnome-settings', 'org-gnome-evolution', 'org-gnome-nautilus']
 
 [org/gnome/desktop/notifications/application/firefox-esr]
 application-id='firefox-esr.desktop'
@@ -116,6 +116,9 @@ application-id='io.github.focustimerhq.FocusTimer.desktop'
 
 [org/gnome/desktop/notifications/application/org-gnome-evolution]
 application-id='org.gnome.Evolution.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-nautilus]
+application-id='org.gnome.Nautilus.desktop'
 
 [org/gnome/desktop/notifications/application/org-gnome-settings]
 application-id='org.gnome.Settings.desktop'
@@ -143,6 +146,7 @@ secondary-color='#000000'
 idle-delay=uint32 600
 
 [org/gnome/desktop/wm/keybindings]
+close=['<Super>w']
 show-desktop=['<Super>d']
 switch-to-workspace-left=['<Control><Super>Left']
 switch-to-workspace-right=['<Control><Super>Right']
@@ -227,13 +231,16 @@ zoom-level=17
 workspaces-only-on-primary=false
 
 [org/gnome/nautilus/preferences]
-default-folder-viewer='icon-view'
+default-folder-viewer='list-view'
 migrated-gtk-settings=true
 search-filter-time-type='last_modified'
 
 [org/gnome/nautilus/window-state]
 initial-size=(890, 550)
 initial-size-file-chooser=(890, 550)
+
+[org/gnome/portal/filechooser/org.gnome.Nautilus]
+last-folder-path='/home/nan/Downloads'
 
 [org/gnome/portal/filechooser/org.zotero.Zotero]
 last-folder-path='/home/nan/Dropbox (Maestral)/zotero pdf'
@@ -250,17 +257,28 @@ info-last-device='/org/freedesktop/UPower/devices/battery_BAT0'
 info-stats-type='discharge-accuracy'
 
 [org/gnome/settings-daemon/plugins/color]
-night-light-enabled=true
+night-light-enabled=false
 night-light-last-coordinates=(38.608890496893032, -121.379)
 night-light-schedule-automatic=false
-night-light-schedule-from=19.0
-night-light-schedule-to=5.0
-night-light-temperature=uint32 2700
+night-light-schedule-from=1e-08
+night-light-schedule-to=24.0
+night-light-temperature=uint32 3700
 
 [org/gnome/settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
 decrease-text-size=['<Alt><Super>comma']
 home=['<Super>e']
 increase-text-size=['<Alt><Super>period']
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Alt><Super>l'
+command='gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true'
+name='Night light on'
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+binding='<Alt><Super>semicolon'
+command='gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled false'
+name='Night light off'
 
 [org/gnome/settings-daemon/plugins/power]
 sleep-inactive-ac-timeout=2700
