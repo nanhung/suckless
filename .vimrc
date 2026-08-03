@@ -1,29 +1,25 @@
 " Comments in Vimscript start with a `"`.
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin()
 Plug 'vimwiki/vimwiki'
 Plug 'junegunn/goyo.vim'
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'    		" show git changes in gutter
+Plug 'dracula/vim'
 call plug#end()
 
 " Scroll terminal <C-w>N
 set background=dark
-colorscheme retrobox
+colorscheme dracula
 set clipboard+=unnamedplus 
-nnoremap Q vipJjj
+nnoremap Q vipJ
 
 let g:vimwiki_list = [{ 'syntax': 'markdown', 
                   \ 'ext': 'md',
                   \ 'path': '~/just-keep-writing/P-notes/'}]
-
-let g:vim_markdown_toc_autofit = 1
-
 " VWS <searh term>
 " lne:   next 
 " lp:    previous
 " @:     find next
-" copen: open list
+" lopen: open list
 "
 " vim /<search term>/g *.md
 
@@ -37,6 +33,8 @@ let g:vim_markdown_toc_autofit = 1
 " loaded some other way (e.g. saved as `foo`, and then Vim started with
 " `vim -u foo`).
 set nocompatible
+
+set colorcolumn=80
 
 " Disable the default Vim startup message.
 set shortmess+=I
@@ -70,8 +68,6 @@ let &t_EI = "\e[2 q"
 " jump up or down to a particular line, by {count}k to go up or {count}j to go
 " down.
 set relativenumber
-
-set colorcolumn=80              " vertical line to indicate line number
 
 " Always show the status line at the bottom, even if you only have one window open.
 set laststatus=2
