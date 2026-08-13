@@ -3,12 +3,12 @@ call plug#begin()
 Plug 'vimwiki/vimwiki'
 Plug 'junegunn/goyo.vim'
 Plug 'airblade/vim-gitgutter'    		" show git changes in gutter
-Plug 'dracula/vim'
+Plug 'mhinz/vim-startify'            " A start menu for vim
 call plug#end()
 
 " Scroll terminal <C-w>N
 set background=dark
-colorscheme dracula
+colorscheme retrobox
 set clipboard+=unnamedplus 
 nnoremap Q vipJ
 
