@@ -122,3 +122,4 @@ nnoremap <Down>  :echoe "Use j"<CR>
 "inoremap <Right> <ESC>:echoe "Use l"<CR>
 "inoremap <Up>    <ESC>:echoe "Use k"<CR>
 "inoremap <Down>  <ESC>:echoe "Use j"<CR>
+imap jj <Esc>
