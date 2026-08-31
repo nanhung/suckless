@@ -8,7 +8,7 @@ call plug#end()
 
 " Scroll terminal <C-w>N
 set background=dark
-colorscheme zaibatsu
+colorscheme quiet
 set clipboard+=unnamedplus 
 nnoremap Q vipJ
 
