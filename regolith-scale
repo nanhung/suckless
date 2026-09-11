@@ -1,0 +1,336 @@
+#!/usr/bin/env bash
+#
+# regolith-scale - change display scale on a Regolith 4 Wayland (sway) session.
+#
+# The scale is applied immediately through sway and persisted into the kanshi
+# profiles under ~/.config/regolith3/kanshi/profiles, so it survives monitor
+# hotplug, logout and reboot. Without the kanshi part, kanshi reapplies the old
+# scale the next time the display layout changes.
+
+set -euo pipefail
+
+PROFILE_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/regolith3/kanshi/profiles"
+KANSHI_UNIT="regolith-init-kanshi.service"
+DISPLAYD_UNIT="regolith-init-displayd.service"
+RELOAD_STAMP="${XDG_RUNTIME_DIR:-/tmp}/regolith-scale.reload"
+RELOAD_DELAY=2
+SELF="$(readlink -f "$0")"
+STEP_DEFAULT="0.25"
+MIN_SCALE="0.5"
+MAX_SCALE="4.0"
+
+LOCKFILE="${XDG_RUNTIME_DIR:-/tmp}/regolith-scale.lock"
+
+TARGET=""       # output name, empty means focused output
+TEMP=0          # 1 = apply live only, do not touch kanshi
+ALL=0           # 1 = every active output
+NOTIFY=0        # 1 = report the new scale via notify-send
+ACTION=""       # "set" | "step" | "list"
+VALUE=""
+RESULTS=""      # summary line(s) for --notify
+
+die() { printf 'regolith-scale: %s\n' "$*" >&2; exit 1; }
+note() { printf '%s\n' "$*" >&2; }
+
+usage() {
+    cat <<'EOF'
+Usage: regolith-scale [options] [<scale> | +[step] | -[step]]
+
+Change the display scale of a Regolith (sway/Wayland) output.
+
+Arguments:
+  <scale>        Absolute scale factor, e.g. 1, 1.25, 1.5, 2
+  +[step]        Increase scale (default step 0.25), e.g. +  or  +0.5
+  -[step]        Decrease scale (default step 0.25), e.g. -  or  -0.1
+  (none)         Show the current scale of each output
+
+Options:
+  -o, --output NAME   Target this output (default: the focused one)
+  -a, --all           Target every active output
+  -t, --temp          Apply now only; do not persist to kanshi
+  -n, --notify        Show the new scale as a desktop notification
+  -l, --list          List outputs and their current scale
+  -h, --help          Show this help
+
+Examples:
+  regolith-scale                 # what is my scale right now?
+  regolith-scale 1.5             # set focused output to 1.5
+  regolith-scale +               # bump up by 0.25
+  regolith-scale -0.1            # nudge down by 0.1
+  regolith-scale -o eDP-1 1.25   # set the laptop panel
+  regolith-scale --all 1         # everything back to 1:1
+EOF
+}
+
+# --- argument parsing ------------------------------------------------------
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -h|--help)   usage; exit 0 ;;
+        -l|--list)   ACTION="list"; shift ;;
+        -t|--temp)   TEMP=1; shift ;;
+        -n|--notify) NOTIFY=1; shift ;;
+        --reload-worker)   # internal: debounced kanshi reload
+            [ $# -ge 2 ] || die "--reload-worker needs a token"
+            ACTION="worker"; VALUE="$2"; shift 2 ;;
+        -a|--all)    ALL=1; shift ;;
+        -o|--output)
+            [ $# -ge 2 ] || die "--output needs an output name"
+            TARGET="$2"; shift 2 ;;
+        --output=*)  TARGET="${1#*=}"; shift ;;
+        +|+[0-9]*)
+            ACTION="step"; VALUE="${1#+}"; VALUE="${VALUE:-$STEP_DEFAULT}"; shift ;;
+        -|-[0-9]*)
+            ACTION="step"; VALUE="-${1#-}"; [ "$VALUE" = "-" ] && VALUE="-$STEP_DEFAULT"; shift ;;
+        [0-9]*)
+            ACTION="set"; VALUE="$1"; shift ;;
+        *) die "unknown argument '$1' (try --help)" ;;
+    esac
+done
+
+[ -n "$ACTION" ] || ACTION="list"
+
+# --- environment checks ----------------------------------------------------
+
+command -v swaymsg >/dev/null || die "swaymsg not found - is this a sway session?"
+command -v jq >/dev/null      || die "jq not found - install it with: sudo apt install jq"
+swaymsg -t get_version >/dev/null 2>&1 || die "cannot talk to sway (is SWAYSOCK set?)"
+
+# --- helpers ---------------------------------------------------------------
+
+outputs_json() { swaymsg -t get_outputs -r; }
+
+focused_output() {
+    local name
+    name=$(swaymsg -t get_workspaces -r | jq -r 'map(select(.focused)) | .[0].output // empty')
+    [ -n "$name" ] || name=$(outputs_json | jq -r 'map(select(.active)) | .[0].name // empty')
+    [ -n "$name" ] || die "no active output found"
+    printf '%s' "$name"
+}
+
+active_output_names() {
+    outputs_json | jq -r '.[] | select(.active) | .name'
+}
+
+output_field() {  # output_field <name> <jq-field>
+    outputs_json | jq -r --arg n "$1" --arg f "$2" \
+        'map(select(.name == $n)) | .[0][$f] // empty'
+}
+
+# kanshi matches outputs by "<make> <model> <serial>"
+output_desc() {
+    outputs_json | jq -r --arg n "$1" \
+        'map(select(.name == $n)) | .[0] | if . == null then "" else "\(.make) \(.model) \(.serial)" end'
+}
+
+# The scale recorded in the kanshi profiles. This is the authoritative value:
+# the script writes it synchronously, whereas sway's reported scale can still
+# lag a moment behind a kanshi restart, which made fast repeated key presses
+# read a stale number and skip a step.
+profile_scale() {
+    local desc="$1" file found=""
+    [ -d "$PROFILE_DIR" ] || return 0
+    shopt -s nullglob
+    for file in "$PROFILE_DIR"/*; do
+        [ -f "$file" ] || continue
+        found=$(awk -v marker="output \"$desc\"" '
+            {
+                p = index($0, marker)
+                if (p == 0) next
+                tail = substr($0, p + length(marker))
+                if (match(tail, /(^|[ \t])scale[ \t]+[0-9]+(\.[0-9]+)?/)) {
+                    s = substr(tail, RSTART, RLENGTH)
+                    sub(/^[ \t]*scale[ \t]+/, "", s)
+                    print s
+                    exit
+                }
+            }
+        ' "$file")
+        [ -n "$found" ] && break
+    done
+    shopt -u nullglob
+    printf '%s' "$found"
+}
+
+# Scale to step from: the persisted value normally, sway's live value when the
+# change is temporary (nothing was written to disk to read back).
+current_scale() {
+    local name="$1" desc="" v=""
+    if [ "$TEMP" -eq 0 ]; then
+        desc=$(output_desc "$name")
+        [ -n "$desc" ] && v=$(profile_scale "$desc")
+    fi
+    [ -n "$v" ] || v=$(output_field "$name" scale)
+    [ -n "$v" ] || v=1
+    printf '%s' "$v"
+}
+
+# trim trailing zeros so profiles stay tidy: 1.50 -> 1.5, 1.00 -> 1
+tidy() {
+    printf '%s' "$1" | awk '{ v = $0 + 0; s = sprintf("%.4f", v); sub(/0+$/, "", s); sub(/\.$/, "", s); print s }'
+}
+
+validate_scale() {
+    local v="$1"
+    [[ "$v" =~ ^[0-9]+(\.[0-9]+)?$ ]] || die "'$v' is not a valid scale factor"
+    awk -v v="$v" -v lo="$MIN_SCALE" -v hi="$MAX_SCALE" \
+        'BEGIN { exit !(v + 0 >= lo + 0 && v + 0 <= hi + 0) }' \
+        || die "scale $v is outside the sane range $MIN_SCALE - $MAX_SCALE"
+}
+
+# Rewrite "scale <n>" for a given output in every kanshi profile that mentions
+# it. Adds the directive when the profile has none.
+persist_scale() {
+    local desc="$1" value="$2" file tmp hits=0
+    local marker="output \"$desc\""
+
+    [ -d "$PROFILE_DIR" ] || { note "warning: $PROFILE_DIR does not exist; change is temporary"; return; }
+
+    shopt -s nullglob
+    for file in "$PROFILE_DIR"/*; do
+        [ -f "$file" ] || continue
+        grep -qF "$marker" "$file" || continue
+
+        tmp=$(mktemp)
+        awk -v marker="$marker" -v value="$value" '
+            {
+                p = index($0, marker)
+                if (p == 0) { print; next }
+                head = substr($0, 1, p + length(marker) - 1)
+                tail = substr($0, p + length(marker))
+                if (tail ~ /(^|[ \t])scale[ \t]+[0-9]+(\.[0-9]+)?/)
+                    sub(/(^|[ \t])scale[ \t]+[0-9]+(\.[0-9]+)?/, " scale " value, tail)
+                else
+                    tail = tail " scale " value
+                gsub(/[ \t]+$/, "", tail)
+                print head tail
+            }
+        ' "$file" > "$tmp"
+
+        if [ -s "$tmp" ]; then
+            cat "$tmp" > "$file"      # preserve ownership/permissions
+            hits=$((hits + 1))
+        fi
+        rm -f "$tmp"
+    done
+    shopt -u nullglob
+
+    if [ "$hits" -eq 0 ]; then
+        note "warning: no kanshi profile references \"$desc\"; change is temporary"
+    fi
+    return 0
+}
+
+reload_kanshi() {
+    # Both units carry a systemd start limit (kanshi 5/10s, displayd 5/30s) and
+    # displayd is pulled along by Requires=, so a burst of restarts drops them
+    # into a failed state - which is why the reload is debounced rather than run
+    # on every key press. Clearing the counters first makes a restart safe even
+    # if an earlier failure left one latched.
+    systemctl --user reset-failed "$KANSHI_UNIT" "$DISPLAYD_UNIT" 2>/dev/null || true
+    systemctl --user restart "$KANSHI_UNIT" 2>/dev/null \
+        || note "warning: could not restart $KANSHI_UNIT"
+    # Restarting kanshi can take displayd down with it; put it back if so.
+    systemctl --user is-active --quiet "$DISPLAYD_UNIT" 2>/dev/null \
+        || systemctl --user start "$DISPLAYD_UNIT" 2>/dev/null || true
+}
+
+# Reload kanshi once, RELOAD_DELAY seconds after the *last* scale change, so
+# that holding a zoom key causes one restart instead of one per press. Each run
+# writes a fresh token; a worker whose token has been superseded exits quietly.
+schedule_reload() {
+    local token
+    token="$(date +%s%N)"
+    printf '%s' "$token" > "$RELOAD_STAMP" 2>/dev/null || { reload_kanshi; return; }
+    # 9>&- matters: the worker must not inherit the lock fd, or its sleep would
+    # hold the lock and stall every following key press.
+    setsid "$SELF" --reload-worker "$token" </dev/null >/dev/null 2>&1 9>&- &
+}
+
+apply_scale() {  # apply_scale <name> <value>
+    local name="$1" value="$2" desc
+    swaymsg -q output "$name" scale "$value" \
+        || die "sway rejected scale $value for $name"
+
+    if [ "$TEMP" -eq 0 ]; then
+        desc=$(output_desc "$name")
+        [ -n "$desc" ] && persist_scale "$desc" "$value"
+    fi
+    printf '%s -> scale %s\n' "$name" "$value"
+    RESULTS="${RESULTS:+$RESULTS
+}$name: $value"
+}
+
+list_outputs() {
+    outputs_json | jq -r '
+        .[] | select(.active) |
+        "\(.name)\t\(.make) \(.model)\tscale \(.scale)\t\(.rect.width)x\(.rect.height) logical"
+    ' | column -t -s $'\t'
+}
+
+# --- main ------------------------------------------------------------------
+
+if [ "$ACTION" = "list" ]; then
+    list_outputs
+    exit 0
+fi
+
+# Debounced reload worker: wait, then reload only if no newer run superseded us.
+if [ "$ACTION" = "worker" ]; then
+    sleep "$RELOAD_DELAY"
+    [ "$(cat "$RELOAD_STAMP" 2>/dev/null)" = "$VALUE" ] || exit 0
+    reload_kanshi
+    exit 0
+fi
+
+# Serialise concurrent runs. Holding a zoom keybinding fires this repeatedly,
+# and two copies rewriting the same kanshi profile would race.
+if command -v flock >/dev/null; then
+    exec 9>"$LOCKFILE" && flock 9
+fi
+
+if [ "$ALL" -eq 1 ]; then
+    mapfile -t TARGETS < <(active_output_names)
+    [ "${#TARGETS[@]}" -gt 0 ] || die "no active outputs"
+else
+    [ -n "$TARGET" ] || TARGET=$(focused_output)
+    [ -n "$(output_field "$TARGET" name)" ] || die "no such output: $TARGET"
+    TARGETS=("$TARGET")
+fi
+
+CHANGED=0
+for out in "${TARGETS[@]}"; do
+    if [ "$ACTION" = "step" ]; then
+        cur=$(current_scale "$out")
+        new=$(awk -v c="$cur" -v d="$VALUE" 'BEGIN { printf "%.4f", c + d }')
+        new=$(tidy "$new")
+        awk -v v="$new" -v lo="$MIN_SCALE" -v hi="$MAX_SCALE" \
+            'BEGIN { exit !(v + 0 >= lo + 0 && v + 0 <= hi + 0) }' || {
+            limit=$( [ "${VALUE#-}" != "$VALUE" ] && echo minimum || echo maximum )
+            note "$out: already at the $limit scale ($cur)"
+            [ "$NOTIFY" -eq 1 ] && notify-send -a regolith-scale -u low \
+                -h string:x-canonical-private-synchronous:regolith-scale \
+                "Display scale" "$out: at $limit ($cur)" 2>/dev/null || true
+            continue
+        }
+    else
+        new=$(tidy "$VALUE")
+        validate_scale "$new"
+    fi
+
+    apply_scale "$out" "$new"
+    CHANGED=1
+done
+
+# Tell kanshi about the new profiles, once the key press storm has settled.
+if [ "$CHANGED" -eq 1 ] && [ "$TEMP" -eq 0 ]; then
+    schedule_reload
+fi
+
+# One replacing notification (the synchronous hint keeps repeated presses from
+# stacking up a queue of popups).
+if [ "$CHANGED" -eq 1 ] && [ "$NOTIFY" -eq 1 ] && command -v notify-send >/dev/null; then
+    notify-send -a regolith-scale -u low \
+        -h string:x-canonical-private-synchronous:regolith-scale \
+        "Display scale" "$RESULTS" 2>/dev/null || true
+fi
