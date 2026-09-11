@@ -1,0 +1,151 @@
+#!/usr/bin/env python3
+"""Get/set GNOME (Mutter) per-monitor scale from the command line.
+
+Usage:
+    gnome-scale                    # list monitors, current + supported scales
+    gnome-scale 1.5                # set scale on the primary monitor
+    gnome-scale eDP-1 1.5          # set scale on a specific connector
+    gnome-scale eDP-1 1.5 --temp   # apply without saving to monitors.xml
+"""
+
+import sys
+
+import gi
+
+gi.require_version("Gio", "2.0")
+from gi.repository import Gio, GLib
+
+BUS = "org.gnome.Mutter.DisplayConfig"
+PATH = "/org/gnome/Mutter/DisplayConfig"
+
+METHOD_TEMPORARY = 1
+METHOD_PERSISTENT = 2
+
+
+def proxy():
+    return Gio.DBusProxy.new_for_bus_sync(
+        Gio.BusType.SESSION, Gio.DBusProxyFlags.NONE, None, BUS, PATH, BUS, None
+    )
+
+
+def state(p):
+    serial, monitors, logical, props = p.call_sync(
+        "GetCurrentState", None, Gio.DBusCallFlags.NONE, -1, None
+    ).unpack()
+    return serial, monitors, logical, props
+
+
+def show(monitors, logical):
+    scales = {}
+    primary = None
+    for x, y, scale, transform, is_primary, mons, _ in logical:
+        for connector, *_ in mons:
+            scales[connector] = scale
+            if is_primary:
+                primary = connector
+    for (connector, vendor, product, _serial), modes, mprops in monitors:
+        name = mprops.get("display-name", product)
+        current = next((m for m in modes if m[6].get("is-current")), None)
+        line = f"{connector}  {name}"
+        if connector in scales:
+            line += f"  scale={scales[connector]:g}"
+            if connector == primary:
+                line += " (primary)"
+        else:
+            line += "  [disabled]"
+        print(line)
+        if current:
+            supported = ", ".join(f"{s:g}" for s in current[5])
+            print(f"    mode {current[0]}   supported scales: {supported}")
+
+
+def apply(connector, scale, persistent=True):
+    p = proxy()
+    serial, monitors, logical, _ = state(p)
+
+    mode_of = {}
+    allowed = {}
+    for (conn, *_), modes, _ in monitors:
+        current = next((m for m in modes if m[6].get("is-current")), None)
+        if current:
+            mode_of[conn] = current[0]
+            allowed[conn] = current[5]
+
+    if connector not in mode_of:
+        sys.exit(f"no active monitor on connector {connector!r}")
+
+    ok = allowed[connector]
+    if not any(abs(scale - s) < 1e-6 for s in ok):
+        sys.exit(
+            f"scale {scale:g} not supported on {connector}; "
+            f"supported: {', '.join(f'{s:g}' for s in ok)}"
+        )
+
+    new_logical = []
+    found = False
+    for x, y, cur_scale, transform, is_primary, mons, _ in logical:
+        conns = [m[0] for m in mons]
+        use = scale if connector in conns else cur_scale
+        if connector in conns:
+            found = True
+        new_logical.append(
+            (
+                x,
+                y,
+                use,
+                transform,
+                is_primary,
+                [(c, mode_of[c], {}) for c in conns],
+            )
+        )
+    if not found:
+        sys.exit(f"{connector} is not part of any enabled logical monitor")
+
+    args = GLib.Variant(
+        "(uua(iiduba(ssa{sv}))a{sv})",
+        (
+            serial,
+            METHOD_PERSISTENT if persistent else METHOD_TEMPORARY,
+            new_logical,
+            {},
+        ),
+    )
+    p.call_sync("ApplyMonitorsConfig", args, Gio.DBusCallFlags.NONE, -1, None)
+
+
+def main(argv):
+    persistent = True
+    args = []
+    for a in argv:
+        if a in ("--temp", "--temporary"):
+            persistent = False
+        elif a in ("-h", "--help"):
+            print(__doc__)
+            return
+        else:
+            args.append(a)
+
+    p = proxy()
+    _, monitors, logical, _ = state(p)
+
+    if not args:
+        show(monitors, logical)
+        return
+
+    if len(args) == 1:
+        connector = next(
+            (m[0] for *_, is_primary, mons, _ in logical if is_primary for m in mons),
+            None,
+        )
+        if connector is None:
+            sys.exit("no primary monitor found; pass a connector explicitly")
+        scale = float(args[0])
+    else:
+        connector, scale = args[0], float(args[1])
+
+    apply(connector, scale, persistent)
+    print(f"{connector} -> scale {scale:g}" + ("" if persistent else " (temporary)"))
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
