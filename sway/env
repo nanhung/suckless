@@ -1,0 +1,6 @@
+# Input method: route X11/XWayland, GTK and Qt apps to fcitx5.
+# Read by regolith-wayland.service via EnvironmentFile=-%h/.config/regolith3/sway/env,
+# which overrides the ibus values gnome-session pushes into the session env.
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx

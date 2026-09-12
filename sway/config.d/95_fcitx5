@@ -1,0 +1,6 @@
+###############################################################################
+# Input method
+###############################################################################
+
+# fcitx5 is not started by any autostart hook, so launch it with the session.
+exec fcitx5 -d --replace

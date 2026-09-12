@@ -1,0 +1,9 @@
+###############################################################################
+# Display scaling (regolith-scale)
+###############################################################################
+
+## Modify // Zoom In (scale up) // <> / ##
+bindsym $mod+slash exec $HOME/.local/bin/regolith-scale --notify +
+
+## Modify // Zoom Out (scale down) // <><Alt> / ##
+bindsym $mod+$alt+slash exec $HOME/.local/bin/regolith-scale --notify -
