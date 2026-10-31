@@ -1,0 +1,6 @@
+###############################################################################
+# Laptop screen (eDP-1) as main display
+###############################################################################
+workspace 1 output eDP-1
+exec swaymsg focus output eDP-1
+exec_always xrandr --output eDP-1 --primary
